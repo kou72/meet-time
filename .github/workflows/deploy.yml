@@ -29,7 +29,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          NODE_ENV: 'production'
+          NODE_ENV: "production"
 
       # GitHub Pages にデプロイする
       - name: Deploy
@@ -37,3 +37,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: out
+          cname: meet-time.skapp.dev
