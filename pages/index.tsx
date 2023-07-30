@@ -58,6 +58,13 @@ export default function MyCalendar() {
     setEventsInUrl(url.toString());
   };
 
+  const updateEvents = () => {
+    if (!calendarRef.current) return;
+    const calendarApi = calendarRef.current.getApi();
+    updateEventsText(calendarApi);
+    updateEventListInUrl();
+  };
+
   const eventsTextToClipboard = (e: React.MouseEvent) => {
     navigator.clipboard.writeText(eventsText);
   };
@@ -100,6 +107,7 @@ export default function MyCalendar() {
             select={handleDateSelect as any}
             eventClick={handleEventClick as any}
             eventsSet={updateEventListInUrl}
+            eventChange={updateEvents}
             eventColor="#475569"
             ref={calendarRef}
             eventTimeFormat={{
