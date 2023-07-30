@@ -30,6 +30,11 @@ export default function MyCalendar() {
       selectable={true}
       select={handleDateSelect}
       ref={calendarRef}
+      eventTimeFormat={{
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      }}
     />
   );
 }
