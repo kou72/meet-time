@@ -96,9 +96,9 @@ export default function MyCalendar() {
 
   return (
     <div className="h-screen bg-slate-200">
-      <title>Meet Time</title>
+      <title>MeetTime</title>
       <div className="h-12 bg-gray-700 flex items-center justify-center">
-        <h1 className="font-bold text-center text-white">Meet Time</h1>
+        <h1 className="font-bold text-center text-white">MeetTime</h1>
       </div>
       <div className="flex mt-8 mx-12 h-4/5">
         <div className="flex-grow">
