@@ -15,7 +15,6 @@ export default function MyCalendar() {
   }) => {
     let calendarApi = selectInfo.view.calendar;
     calendarApi.unselect();
-
     calendarApi.addEvent({
       id: createEventId(),
       start: selectInfo.startStr,
@@ -38,6 +37,7 @@ export default function MyCalendar() {
       }}
       locale={jaLocale}
       allDaySlot={false}
+      editable={true}
     />
   );
 }
