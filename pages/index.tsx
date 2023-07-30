@@ -125,7 +125,7 @@ export default function MyCalendar() {
         </div>
         <div className="ml-8 w-80">
           <textarea
-            className="w-full h-1/3 p-2 border-2 border-gray-400 rounded bg-gray-100"
+            className="w-full h-1/3 p-2 border-2 border-gray-400 rounded"
             readOnly
             value={eventsText}
           ></textarea>
@@ -136,7 +136,7 @@ export default function MyCalendar() {
             🗒テキストをコピー
           </button>
           <textarea
-            className="w-full mt-16 h-1/6 p-2 border-2 border-stone-400 rounded bg-gray-100"
+            className="w-full mt-16 h-1/6 p-2 border-2 border-stone-400 rounded"
             readOnly
             value={eventsInUrl}
           ></textarea>
