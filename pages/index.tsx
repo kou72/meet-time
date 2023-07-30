@@ -100,6 +100,7 @@ export default function MyCalendar() {
             select={handleDateSelect as any}
             eventClick={handleEventClick as any}
             eventsSet={updateEventListInUrl}
+            eventColor="#2c3e50"
             ref={calendarRef}
             eventTimeFormat={{
               hour: "2-digit",
