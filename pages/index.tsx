@@ -12,16 +12,13 @@ export default function MyCalendar() {
     endStr: any;
     allDay: any;
   }) => {
-    // Generate a title based on start and end times
-    let title = "";
+    // clear date selection
     let calendarApi = selectInfo.view.calendar;
-
-    calendarApi.unselect(); // clear date selection
+    calendarApi.unselect();
 
     // Add event to calendar without prompt
     calendarApi.addEvent({
       id: createEventId(),
-      title,
       start: selectInfo.startStr,
       end: selectInfo.endStr,
       allDay: selectInfo.allDay,
