@@ -100,7 +100,7 @@ export default function MyCalendar() {
             select={handleDateSelect as any}
             eventClick={handleEventClick as any}
             eventsSet={updateEventListInUrl}
-            eventColor="#2c3e50"
+            eventColor="#475569"
             ref={calendarRef}
             eventTimeFormat={{
               hour: "2-digit",
@@ -116,6 +116,7 @@ export default function MyCalendar() {
         <div className="ml-8 w-80">
           <textarea
             className="w-full h-1/3 p-2 border-2 border-gray-400 rounded bg-gray-100"
+            read-only
             value={eventsText}
           ></textarea>
           <button
@@ -126,6 +127,7 @@ export default function MyCalendar() {
           </button>
           <textarea
             className="w-full mt-16 h-1/6 p-2 border-2 border-stone-400 rounded bg-gray-100"
+            read-only
             value={eventsInUrl}
           ></textarea>
           <button
