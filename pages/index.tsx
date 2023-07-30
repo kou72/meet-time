@@ -70,23 +70,31 @@ export default function MyCalendar() {
   };
 
   return (
-    <FullCalendar
-      plugins={[timeGridPlugin, interactionPlugin]}
-      initialView="timeGridWeek"
-      selectable={true}
-      select={handleDateSelect as any}
-      eventClick={handleEventClick as any}
-      eventsSet={updateEventListInUrl}
-      ref={calendarRef}
-      eventTimeFormat={{
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }}
-      locale={jaLocale}
-      allDaySlot={false}
-      editable={true}
-    />
+    <div className="h-screen">
+      <div className="h-12 bg-gray-200 flex items-center justify-center">
+        <h1 className="font-bold text-center">Meet Time</h1>
+      </div>
+      <div className="mt-8 mx-12 h-4/5">
+        <FullCalendar
+          plugins={[timeGridPlugin, interactionPlugin]}
+          initialView="timeGridWeek"
+          selectable={true}
+          select={handleDateSelect as any}
+          eventClick={handleEventClick as any}
+          eventsSet={updateEventListInUrl}
+          ref={calendarRef}
+          eventTimeFormat={{
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+          }}
+          locale={jaLocale}
+          allDaySlot={false}
+          editable={true}
+          height="100%"
+        />
+      </div>
+    </div>
   );
 }
 
