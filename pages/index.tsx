@@ -6,7 +6,6 @@ import jaLocale from "@fullcalendar/core/locales/ja";
 
 export default function MyCalendar() {
   const calendarRef = useRef(null);
-
   const handleDateSelect = (selectInfo: {
     view: { calendar: any };
     startStr: any;
@@ -15,12 +14,17 @@ export default function MyCalendar() {
   }) => {
     let calendarApi = selectInfo.view.calendar;
     calendarApi.unselect();
-    calendarApi.addEvent({
+    const newEvent = {
       id: createEventId(),
       start: selectInfo.startStr,
       end: selectInfo.endStr,
       allDay: selectInfo.allDay,
-    });
+    };
+    calendarApi.addEvent(newEvent);
+  };
+
+  const handleEventClick = (clickInfo: { event: any }) => {
+    clickInfo.event.remove();
   };
 
   return (
@@ -29,6 +33,7 @@ export default function MyCalendar() {
       initialView="timeGridWeek"
       selectable={true}
       select={handleDateSelect}
+      eventClick={handleEventClick}
       ref={calendarRef}
       eventTimeFormat={{
         hour: "2-digit",
