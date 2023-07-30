@@ -10,6 +10,17 @@ export default function MyCalendar() {
   const [eventGuid, setEventGuid] = useState(0);
   const [eventsText, setEventsText] = useState<string>("");
 
+  const updateEventsText = (calendarApi: any) => {
+    const eventList = calendarApi.getEvents();
+    let text = "";
+    eventList.forEach((event: any) => {
+      const eventStart = new Date(event.start!);
+      const eventEnd = new Date(event.end!);
+      text += formatDate(eventStart) + " ~ " + formatTime(eventEnd) + "\n";
+    });
+    setEventsText(text);
+  };
+
   const handleDateSelect = (selectInfo: DateSelectArg) => {
     let calendarApi = selectInfo.view.calendar;
     calendarApi.unselect();
@@ -20,20 +31,13 @@ export default function MyCalendar() {
       allDay: selectInfo.allDay,
     };
     calendarApi.addEvent(newEvent);
-
-    // selected date formatting and console output
-    const eventList = calendarApi.getEvents();
-    let text = "";
-    eventList.forEach((event) => {
-      const eventStart = new Date(event.start!);
-      const eventEnd = new Date(event.end!);
-      text += formatDate(eventStart) + "~" + formatTime(eventEnd) + "\n";
-    });
-    setEventsText(text);
+    updateEventsText(calendarApi);
   };
 
   const handleEventClick = (clickInfo: EventClickArg) => {
     clickInfo.event.remove();
+    let calendarApi = clickInfo.view.calendar;
+    updateEventsText(calendarApi);
   };
 
   const updateEventListInUrl = () => {
