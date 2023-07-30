@@ -56,6 +56,10 @@ export default function MyCalendar() {
     window.history.replaceState({}, "", url.toString());
   };
 
+  const copyToClipboard = (e: React.MouseEvent) => {
+    navigator.clipboard.writeText(eventsText);
+  };
+
   useEffect(() => {
     const url = new URL(window.location.href);
     const eventsInUrl = url.searchParams.get("events");
@@ -105,9 +109,14 @@ export default function MyCalendar() {
         <div className="ml-8 w-80">
           <textarea
             className="w-full h-1/2 p-2 border-2 border-gray-400 rounded bg-gray-100"
-            readOnly
             value={eventsText}
           ></textarea>
+          <button
+            onClick={copyToClipboard}
+            className="w-full mt-4 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-400"
+          >
+            テキストコピー
+          </button>
         </div>
       </div>
     </div>
