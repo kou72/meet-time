@@ -95,6 +95,7 @@ export default function MyCalendar() {
 
   return (
     <div className="h-screen">
+      <title>Meet Time</title>
       <div className="h-12 bg-gray-200 flex items-center justify-center">
         <h1 className="font-bold text-center">Meet Time</h1>
       </div>
@@ -124,7 +125,7 @@ export default function MyCalendar() {
         <div className="ml-8 w-80">
           <textarea
             className="w-full h-1/3 p-2 border-2 border-gray-400 rounded bg-gray-100"
-            read-only
+            readOnly
             value={eventsText}
           ></textarea>
           <button
@@ -135,7 +136,7 @@ export default function MyCalendar() {
           </button>
           <textarea
             className="w-full mt-16 h-1/6 p-2 border-2 border-stone-400 rounded bg-gray-100"
-            read-only
+            readOnly
             value={eventsInUrl}
           ></textarea>
           <button
