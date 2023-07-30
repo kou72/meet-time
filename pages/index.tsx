@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
-import { DateSelectArg, EventClickArg, EventApi } from "@fullcalendar/common";
+import { DateSelectArg, EventClickArg } from "@fullcalendar/common";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import jaLocale from "@fullcalendar/core/locales/ja";
@@ -19,6 +19,14 @@ export default function MyCalendar() {
       allDay: selectInfo.allDay,
     };
     calendarApi.addEvent(newEvent);
+
+    // selected date formatting and console output
+    const eventList = calendarApi.getEvents();
+    eventList.forEach((event) => {
+      const eventStart = new Date(event.start!);
+      const eventEnd = new Date(event.end!);
+      console.log(formatDate(eventStart) + " ~ " + formatTime(eventEnd));
+    });
   };
 
   const handleEventClick = (clickInfo: EventClickArg) => {
@@ -81,3 +89,16 @@ export default function MyCalendar() {
     />
   );
 }
+
+const formatDate = (date: Date) => {
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const weekday = ["日", "月", "火", "水", "木", "金", "土"][date.getDay()];
+  return `${month}月${day}日(${weekday}) ${formatTime(date)}`;
+};
+
+const formatTime = (date: Date) => {
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  return `${hours}:${minutes}`;
+};
