@@ -84,6 +84,7 @@ export default function MyCalendar() {
         calendarApi.addEvent(event);
       });
       setEventGuid(events.length);
+      updateEventsText(calendarApi);
     }
   }, []);
 
