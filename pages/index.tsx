@@ -37,6 +37,7 @@ export default function MyCalendar() {
         hour12: false,
       }}
       locale={jaLocale}
+      allDaySlot={false}
     />
   );
 }
