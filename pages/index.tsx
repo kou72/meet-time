@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid"; // Use timeGrid plugin instead of dayGrid
 import interactionPlugin from "@fullcalendar/interaction";
 
 export default function MyCalendar() {
@@ -12,33 +12,30 @@ export default function MyCalendar() {
     endStr: any;
     allDay: any;
   }) => {
-    let title = prompt("Please enter a new title for your event");
+    // Generate a title based on start and end times
+    let title = "";
     let calendarApi = selectInfo.view.calendar;
 
     calendarApi.unselect(); // clear date selection
 
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay,
-      });
-    }
+    // Add event to calendar without prompt
+    calendarApi.addEvent({
+      id: createEventId(),
+      title,
+      start: selectInfo.startStr,
+      end: selectInfo.endStr,
+      allDay: selectInfo.allDay,
+    });
   };
 
   return (
     <FullCalendar
-      plugins={[dayGridPlugin, interactionPlugin]}
-      initialView="dayGridMonth"
+      plugins={[timeGridPlugin, interactionPlugin]} // Use timeGridPlugin here
+      initialView="timeGridWeek" // Change to 'timeGridWeek' for week view
       selectable={true}
       select={handleDateSelect}
       ref={calendarRef}
-      events={[
-        { title: "event1", date: "2023-07-01" },
-        { title: "event2", date: "2023-07-02" },
-      ]}
+      events={[]}
     />
   );
 }
