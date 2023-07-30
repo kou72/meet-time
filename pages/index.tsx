@@ -9,6 +9,7 @@ export default function MyCalendar() {
   const calendarRef = useRef<FullCalendar>(null);
   const [eventGuid, setEventGuid] = useState(0);
   const [eventsText, setEventsText] = useState<string>("");
+  const [eventsInUrl, setEventsInUrl] = useState<string>("");
 
   const updateEventsText = (calendarApi: any) => {
     const eventList = calendarApi.getEvents();
@@ -54,10 +55,15 @@ export default function MyCalendar() {
     const url = new URL(window.location.href);
     url.searchParams.set("events", JSON.stringify(eventList));
     window.history.replaceState({}, "", url.toString());
+    setEventsInUrl(url.toString());
   };
 
-  const copyToClipboard = (e: React.MouseEvent) => {
+  const eventsTextToClipboard = (e: React.MouseEvent) => {
     navigator.clipboard.writeText(eventsText);
+  };
+
+  const eventsInUrlToClipboard = (e: React.MouseEvent) => {
+    navigator.clipboard.writeText(eventsInUrl);
   };
 
   useEffect(() => {
@@ -108,14 +114,24 @@ export default function MyCalendar() {
         </div>
         <div className="ml-8 w-80">
           <textarea
-            className="w-full h-1/2 p-2 border-2 border-gray-400 rounded bg-gray-100"
+            className="w-full h-1/3 p-2 border-2 border-gray-400 rounded bg-gray-100"
             value={eventsText}
           ></textarea>
           <button
-            onClick={copyToClipboard}
+            onClick={eventsTextToClipboard}
             className="w-full mt-4 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-400"
           >
             テキストコピー
+          </button>
+          <textarea
+            className="w-full mt-16 h-1/6 p-2 border-2 border-gray-400 rounded bg-gray-100"
+            value={eventsInUrl}
+          ></textarea>
+          <button
+            onClick={eventsInUrlToClipboard}
+            className="w-full mt-4 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-400"
+          >
+            URLコピー
           </button>
         </div>
       </div>
