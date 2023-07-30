@@ -8,6 +8,7 @@ import jaLocale from "@fullcalendar/core/locales/ja";
 export default function MyCalendar() {
   const calendarRef = useRef<FullCalendar>(null);
   const [eventGuid, setEventGuid] = useState(0);
+  const [eventsText, setEventsText] = useState<string>("");
 
   const handleDateSelect = (selectInfo: DateSelectArg) => {
     let calendarApi = selectInfo.view.calendar;
@@ -22,11 +23,13 @@ export default function MyCalendar() {
 
     // selected date formatting and console output
     const eventList = calendarApi.getEvents();
+    let text = "";
     eventList.forEach((event) => {
       const eventStart = new Date(event.start!);
       const eventEnd = new Date(event.end!);
-      console.log(formatDate(eventStart) + " ~ " + formatTime(eventEnd));
+      text += formatDate(eventStart) + "~" + formatTime(eventEnd) + "\n";
     });
+    setEventsText(text);
   };
 
   const handleEventClick = (clickInfo: EventClickArg) => {
@@ -74,25 +77,34 @@ export default function MyCalendar() {
       <div className="h-12 bg-gray-200 flex items-center justify-center">
         <h1 className="font-bold text-center">Meet Time</h1>
       </div>
-      <div className="mt-8 mx-12 h-4/5">
-        <FullCalendar
-          plugins={[timeGridPlugin, interactionPlugin]}
-          initialView="timeGridWeek"
-          selectable={true}
-          select={handleDateSelect as any}
-          eventClick={handleEventClick as any}
-          eventsSet={updateEventListInUrl}
-          ref={calendarRef}
-          eventTimeFormat={{
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-          }}
-          locale={jaLocale}
-          allDaySlot={false}
-          editable={true}
-          height="100%"
-        />
+      <div className="flex mt-8 mx-12 h-4/5">
+        <div className="flex-grow">
+          <FullCalendar
+            plugins={[timeGridPlugin, interactionPlugin]}
+            initialView="timeGridWeek"
+            selectable={true}
+            select={handleDateSelect as any}
+            eventClick={handleEventClick as any}
+            eventsSet={updateEventListInUrl}
+            ref={calendarRef}
+            eventTimeFormat={{
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+            }}
+            locale={jaLocale}
+            allDaySlot={false}
+            editable={true}
+            height="100%"
+          />
+        </div>
+        <div className="ml-8 w-80">
+          <textarea
+            className="w-full h-1/2 p-2 border-2 border-gray-400 rounded bg-gray-100"
+            readOnly
+            value={eventsText}
+          ></textarea>
+        </div>
       </div>
     </div>
   );
