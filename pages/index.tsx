@@ -131,7 +131,7 @@ export default function MyCalendar() {
           ></textarea>
           <button
             onClick={eventsTextToClipboard}
-            className="w-full mt-4 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600"
+            className="w-full mt-4 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 active:bg-gray-700"
           >
             🗒テキストをコピー
           </button>
@@ -142,7 +142,7 @@ export default function MyCalendar() {
           ></textarea>
           <button
             onClick={eventsInUrlToClipboard}
-            className="w-full mt-4 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600"
+            className="w-full mt-4 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 active:bg-gray-700"
           >
             🔗URLをコピー
           </button>
