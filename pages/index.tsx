@@ -77,16 +77,24 @@ export default function MyCalendar() {
   useEffect(() => {
     const url = new URL(window.location.href);
     const eventsInUrl = url.searchParams.get("events");
-    if (eventsInUrl) {
-      const events = JSON.parse(eventsInUrl);
-      if (!calendarRef.current) return;
-      const calendarApi = calendarRef.current.getApi();
-      events.forEach((event: any) => {
-        calendarApi.addEvent(event);
-      });
-      setEventGuid(events.length);
-      updateEventsText(calendarApi);
-    }
+    if (!eventsInUrl) return;
+    const events = JSON.parse(eventsInUrl);
+    if (!calendarRef.current) return;
+    const calendarApi = calendarRef.current.getApi();
+    events.forEach((event: any) => {
+      calendarApi.addEvent(event);
+    });
+    setEventGuid(events.length);
+    updateEventsText(calendarApi);
+
+    if (events.length == 0) return;
+    const firstEventStart = new Date(events[0].start);
+    const startDate = new Date(
+      firstEventStart.getFullYear(),
+      firstEventStart.getMonth(),
+      firstEventStart.getDate() - firstEventStart.getDay()
+    );
+    calendarApi.gotoDate(startDate);
   }, []);
 
   const createEventId = () => {
