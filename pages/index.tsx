@@ -12,7 +12,8 @@ export default function MyCalendar() {
   const [eventsInUrl, setEventsInUrl] = useState<string>("");
 
   const updateEventsText = (calendarApi: any) => {
-    const eventList = calendarApi.getEvents();
+    let eventList = calendarApi.getEvents();
+    eventList.sort((a: any, b: any) => a.start - b.start);
     let text = "";
     eventList.forEach((event: any) => {
       const eventStart = new Date(event.start!);
