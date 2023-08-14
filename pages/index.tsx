@@ -166,7 +166,7 @@ export default function MyCalendar() {
           </button>
           <button
             onClick={resetEvents}
-            className="w-full mt-12 px-4 py-2 bg-slate-400 text-white rounded hover:bg-slate-300 active:bg-slate-400"
+            className="w-full mt-12 px-4 py-2 bg-slate-500 text-white rounded hover:bg-slate-400 active:bg-slate-500"
           >
             リセット
           </button>
