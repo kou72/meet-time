@@ -103,6 +103,15 @@ export default function MyCalendar() {
     return String(newGuid);
   };
 
+  const resetEvents = () => {
+    if (!calendarRef.current) return;
+    const calendarApi = calendarRef.current.getApi();
+    calendarApi.removeAllEvents();
+    setEventGuid(0);
+    updateEventsText(calendarApi);
+    updateEventListInUrl();
+  };
+
   return (
     <div className="h-screen bg-slate-200">
       <title>MeetTime</title>
@@ -145,7 +154,7 @@ export default function MyCalendar() {
             🗒テキストをコピー
           </button>
           <textarea
-            className="w-full mt-16 h-1/6 p-2 border-2 border-stone-400 rounded"
+            className="w-full mt-12 h-1/6 p-2 border-2 border-stone-400 rounded"
             readOnly
             value={eventsInUrl}
           ></textarea>
@@ -154,6 +163,12 @@ export default function MyCalendar() {
             className="w-full mt-4 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 active:bg-gray-700"
           >
             🔗URLをコピー
+          </button>
+          <button
+            onClick={resetEvents}
+            className="w-full mt-12 px-4 py-2 bg-slate-400 text-white rounded hover:bg-slate-300 active:bg-slate-400"
+          >
+            リセット
           </button>
         </div>
       </div>
